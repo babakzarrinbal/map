@@ -25,5 +25,6 @@ module.exports = {
     //   msTileImage: "img/icons/msapplication-icon-144x144.png",
     // },
   },
-  outputDir: "docs"
+  outputDir: "docs",
+  publicPath: "/map/"
 };
