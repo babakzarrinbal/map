@@ -11,7 +11,7 @@
             style="float:right;height:30px;width:30px;padding:4px;"
             @click="settingvis = true"
           >
-            <img src="/img/icons/menu.png" style="height:calc(100% - 6px);padding:0 3px;" alt />
+            <img src="img/icons/menu.png" style="height:calc(100% - 6px);padding:0 3px;" alt />
           </div>
           <div class="clearfix"></div>
         </div>

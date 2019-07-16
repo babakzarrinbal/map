@@ -32,8 +32,8 @@ self.__precacheManifest = [
     "url": "/map/img/markers/driver_truck_pointer_orange.png"
   },
   {
-    "revision": "8308733c5a1f858e39a83b437a92cf9b",
-    "url": "/map/img/ico/camera-video.png"
+    "revision": "507c66317527fcf167383c9735b34472",
+    "url": "/map/img/ico/capture-picture.png"
   },
   {
     "revision": "ab2b6b5813f7d729ae438ca794f9d06e",
@@ -64,11 +64,11 @@ self.__precacheManifest = [
     "url": "/map/img/icon/notsee.png"
   },
   {
-    "revision": "f4330854a78a0f3f2a38",
-    "url": "/map/js/app.6899eeaf.js"
+    "revision": "a10846d2b73dd85393ac",
+    "url": "/map/js/app.fa4a50b9.js"
   },
   {
-    "revision": "ab34e02c6442e655b02df5e9eb374639",
+    "revision": "0184b172a0309fc5a18d1a95570e8a49",
     "url": "/map/index.html"
   },
   {
@@ -76,20 +76,20 @@ self.__precacheManifest = [
     "url": "/map/img/markers/driver_truck_pointer_green.png"
   },
   {
-    "revision": "507c66317527fcf167383c9735b34472",
-    "url": "/map/img/ico/capture-picture.png"
+    "revision": "91762b2af9bdefdd58f5a5b6e7387361",
+    "url": "/map/img/rings.svg"
   },
   {
     "revision": "ae50af9f16e15cdbefefc426241d4b7b",
     "url": "/map/img/markers/driver_truck_pointer_red.png"
   },
   {
-    "revision": "5ecccd935f91d9a03786d435c5516c5b",
-    "url": "/map/img/markers/driver_truck_pointer.png"
-  },
-  {
     "revision": "fe953f48d20a57a5155040dd7c8c41bc",
     "url": "/map/img/markers/m1.png"
+  },
+  {
+    "revision": "5ecccd935f91d9a03786d435c5516c5b",
+    "url": "/map/img/markers/driver_truck_pointer.png"
   },
   {
     "revision": "81356b0580ec21ee474f885f0e501832",
@@ -108,12 +108,12 @@ self.__precacheManifest = [
     "url": "/map/img/puff.svg"
   },
   {
-    "revision": "91762b2af9bdefdd58f5a5b6e7387361",
-    "url": "/map/img/rings.svg"
-  },
-  {
     "revision": "198da939ef8b67952b65bebae63855c4",
     "url": "/map/img/ico/camera.png"
+  },
+  {
+    "revision": "8308733c5a1f858e39a83b437a92cf9b",
+    "url": "/map/img/ico/camera-video.png"
   },
   {
     "revision": "bd50c61121ac669acd85f8225146fbd3",
@@ -124,7 +124,7 @@ self.__precacheManifest = [
     "url": "/map/css/chunk-vendors.cf85dbd7.css"
   },
   {
-    "revision": "f4330854a78a0f3f2a38",
-    "url": "/map/css/app.0a854895.css"
+    "revision": "a10846d2b73dd85393ac",
+    "url": "/map/css/app.46a7650c.css"
   }
 ];

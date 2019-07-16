@@ -1,10 +1,10 @@
 <template>
   <div class="home w-100 px-0">
     <olmap
-      oljspath="/vendors/openlayer.v.5.3.0/script.js"
-      olcsspath="/vendors/openlayer.v.5.3.0/style.css"
+      oljspath="vendors/openlayer.v.5.3.0/script.js"
+      olcsspath="vendors/openlayer.v.5.3.0/style.css"
       :locations="locations"
-      :lines="{width:5,color:'red',images:[{src: '/img/arrow.png'},{src: '/img/arrow.png'}]}"
+      :lines="{width:5,color:'red',images:[{src: 'img/arrow.png'},{src: 'img/arrow.png'}]}"
       :click="clicktoshow"
       @locationselected="selectedlocationchange"
       locationiqkey="188e59707db08f"
@@ -38,7 +38,7 @@ export default {
               line: {
                 width: 5,
                 color: "blue",
-                images: [{ src: "/img/arrow2.svg", location: 0.3 }]
+                images: [{ src: "img/arrow2.svg", location: 0.3 }]
               }
             }
           ],
