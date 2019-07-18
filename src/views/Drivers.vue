@@ -46,21 +46,21 @@ export default {
     var fromLonLat = ol.proj.fromLonLat;
     // var BingMaps = ol.source.BingMaps;
 
-    var defaultControls = ol.control.defaults;
-    var MousePosition = ol.control.MousePosition;
-    var createStringXY = ol.coordinate.createStringXY;
+    // var defaultControls = ol.control.defaults;
+    // var MousePosition = ol.control.MousePosition;
+    // var createStringXY = ol.coordinate.createStringXY;
     var OSM = ol.source.OSM;
 
     // get location
-    var mousePositionControl = new MousePosition({
-      coordinateFormat: createStringXY(4),
-      projection: "EPSG:4326",
-      // comment the following two lines to have the mouse position
-      // be placed within the map.
-      className: "custom-mouse-position",
-      target: document.getElementById("mouse-position"),
-      undefinedHTML: "&nbsp;"
-    });
+    // var mousePositionControl = new MousePosition({
+    //   coordinateFormat: createStringXY(4),
+    //   projection: "EPSG:4326",
+    //   // comment the following two lines to have the mouse position
+    //   // be placed within the map.
+    //   className: "custom-mouse-position",
+    //   target: document.getElementById("mouse-position"),
+    //   undefinedHTML: "&nbsp;"
+    // });
     var baseTilePath =
       // "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png";
       "http://mt.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"; //Google Road Map
@@ -86,7 +86,7 @@ export default {
     var container = document.getElementById("map");
 
     var map = new Map({
-      controls: defaultControls().extend([mousePositionControl]),
+      controls: [], //defaultControls().extend([mousePositionControl]),
       layers: [baselayer, secondlayer],
       target: container,
       view: new View({
@@ -229,21 +229,21 @@ export default {
       }
     });
 
-    var projectionSelect = document.getElementById("projection");
-    projectionSelect.addEventListener("change", function(event) {
-      mousePositionControl.setProjection(event.target.value);
-    });
+    // var projectionSelect = document.getElementById("projection");
+    // projectionSelect.addEventListener("change", function(event) {
+    //   mousePositionControl.setProjection(event.target.value);
+    // });
 
-    var precisionInput = document.getElementById("precision");
-    precisionInput.addEventListener("change", function(event) {
-      var format = createStringXY(event.target.valueAsNumber);
-      mousePositionControl.setCoordinateFormat(format);
-    });
-    document.body.addEventListener("click", function() {
-      document.getElementById("position").innerHTML = document.querySelector(
-        ".custom-mouse-position"
-      ).innerHTML;
-    });
+    // var precisionInput = document.getElementById("precision");
+    // precisionInput.addEventListener("change", function(event) {
+    //   var format = createStringXY(event.target.valueAsNumber);
+    //   mousePositionControl.setCoordinateFormat(format);
+    // });
+    // document.body.addEventListener("click", function() {
+    //   document.getElementById("position").innerHTML = document.querySelector(
+    //     ".custom-mouse-position"
+    //   ).innerHTML;
+    // });
   },
   async beforeDestroy() {},
   methods: {

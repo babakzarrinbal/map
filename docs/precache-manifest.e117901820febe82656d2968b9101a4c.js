@@ -32,8 +32,8 @@ self.__precacheManifest = [
     "url": "/map/img/markers/driver_truck_pointer_orange.png"
   },
   {
-    "revision": "198da939ef8b67952b65bebae63855c4",
-    "url": "/map/img/ico/camera.png"
+    "revision": "8308733c5a1f858e39a83b437a92cf9b",
+    "url": "/map/img/ico/camera-video.png"
   },
   {
     "revision": "ab2b6b5813f7d729ae438ca794f9d06e",
@@ -64,11 +64,11 @@ self.__precacheManifest = [
     "url": "/map/img/icon/notsee.png"
   },
   {
-    "revision": "cbd813e942ea9734fcaf",
-    "url": "/map/js/app.9172cad2.js"
+    "revision": "724412cf15441dc948c3",
+    "url": "/map/js/app.5f19460b.js"
   },
   {
-    "revision": "2833c7fe60efb52772c3cf8d716625b3",
+    "revision": "88b27ff4dda0ce73101b12886b2ac4d8",
     "url": "/map/index.html"
   },
   {
@@ -112,8 +112,8 @@ self.__precacheManifest = [
     "url": "/map/img/rings.svg"
   },
   {
-    "revision": "8308733c5a1f858e39a83b437a92cf9b",
-    "url": "/map/img/ico/camera-video.png"
+    "revision": "198da939ef8b67952b65bebae63855c4",
+    "url": "/map/img/ico/camera.png"
   },
   {
     "revision": "bd50c61121ac669acd85f8225146fbd3",
@@ -124,7 +124,7 @@ self.__precacheManifest = [
     "url": "/map/css/chunk-vendors.3a57841a.css"
   },
   {
-    "revision": "cbd813e942ea9734fcaf",
-    "url": "/map/css/app.721c6b27.css"
+    "revision": "724412cf15441dc948c3",
+    "url": "/map/css/app.ed18a829.css"
   }
 ];
