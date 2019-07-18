@@ -28,8 +28,8 @@ self.__precacheManifest = [
     "url": "/map/logo.png"
   },
   {
-    "revision": "5ecccd935f91d9a03786d435c5516c5b",
-    "url": "/map/img/markers/driver_truck_pointer.png"
+    "revision": "757cd2bbe52f7583c74f50dbb6b8da22",
+    "url": "/map/img/markers/driver_truck_pointer_orange.png"
   },
   {
     "revision": "198da939ef8b67952b65bebae63855c4",
@@ -48,12 +48,12 @@ self.__precacheManifest = [
     "url": "/map/img/ico/changecam.png"
   },
   {
-    "revision": "a0714fb02a061ca895a573ec5c955a9a",
-    "url": "/map/img/ico/files.png"
-  },
-  {
     "revision": "466ee9fffd0fe04190f5d30da149ae4f",
     "url": "/map/img/ico/file-icon.png"
+  },
+  {
+    "revision": "a0714fb02a061ca895a573ec5c955a9a",
+    "url": "/map/img/ico/files.png"
   },
   {
     "revision": "4e304aecf7492e59dbe18558db8d2098",
@@ -80,24 +80,24 @@ self.__precacheManifest = [
     "url": "/map/img/ico/capture-picture.png"
   },
   {
-    "revision": "757cd2bbe52f7583c74f50dbb6b8da22",
-    "url": "/map/img/markers/driver_truck_pointer_orange.png"
-  },
-  {
     "revision": "ae50af9f16e15cdbefefc426241d4b7b",
     "url": "/map/img/markers/driver_truck_pointer_red.png"
+  },
+  {
+    "revision": "5ecccd935f91d9a03786d435c5516c5b",
+    "url": "/map/img/markers/driver_truck_pointer.png"
   },
   {
     "revision": "fe953f48d20a57a5155040dd7c8c41bc",
     "url": "/map/img/markers/m1.png"
   },
   {
-    "revision": "e01df2edad01887e0e123cf8c3fcc913",
-    "url": "/map/img/markers/restaurant_marker.png"
-  },
-  {
     "revision": "81356b0580ec21ee474f885f0e501832",
     "url": "/map/img/markers/pickup_marker.png"
+  },
+  {
+    "revision": "e01df2edad01887e0e123cf8c3fcc913",
+    "url": "/map/img/markers/restaurant_marker.png"
   },
   {
     "revision": "4683fb013c2262a0fcb699366105f24e",
