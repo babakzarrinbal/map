@@ -5,8 +5,6 @@
       olcsspath="vendors/openlayer.v.5.3.0/style.css"
       :locations="locations"
       :lines="{width:5,color:'red',images:[{src: 'img/arrow.png'},{src: 'img/arrow.png'}]}"
-      :click="clicktoshow"
-      @locationselected="selectedlocationchange"
       locationiqkey="188e59707db08f"
       :showme="true"
       searchable="true"

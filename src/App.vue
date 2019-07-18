@@ -5,7 +5,7 @@
       <!-- <login v-if="!$root.user"></login> -->
       <div style="position:relative;height:100%">
         <div id="header">
-          <datefilter @changed="getdata"></datefilter>
+          <!-- <datefilter @changed="getdata"></datefilter> -->
           <div
             class="float-right"
             style="float:right;height:30px;width:30px;padding:4px;"
@@ -49,7 +49,7 @@
 <script>
 // import login from "@/components/login.vue";
 import settings from "@/components/settings.vue";
-import datefilter from "@/components/datefilter.vue";
+// import datefilter from "@/components/datefilter.vue";
 export default {
   data() {
     return {
@@ -60,8 +60,8 @@ export default {
   },
   components: {
     // login,
-    settings,
-    datefilter
+    settings
+    // datefilter
   },
   async created() {},
   methods: {
