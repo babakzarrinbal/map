@@ -32,11 +32,11 @@
           <a
             @click="nav($event,'/')"
             v-bind:class="{'router-link-exact-active router-link-active':$route.meta.mainindex==1}"
-          >Dashboard</a>
+          >Routing</a>
           <a
             @click="nav($event,'/drivers')"
             v-bind:class="{'router-link-exact-active router-link-active':$route.meta.mainindex==2}"
-          >Drivers</a>
+          >MultiMap</a>
           <a
             @click="nav($event,'/merchants')"
             v-bind:class="{'router-link-exact-active router-link-active':$route.meta.mainindex==3}"
