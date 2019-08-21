@@ -123,6 +123,7 @@
 </template>
 
 <script>
+import { Promise } from "q";
 export default {
   data() {
     let initiated = window.ol;
@@ -158,7 +159,9 @@ export default {
         location: null,
         overlay: null,
         visible: true
-      }
+      },
+      cachedroutes: [],
+      cachednearest: []
     };
   },
   /*
@@ -170,16 +173,16 @@ export default {
           popuphtml: "<div>test</div>", // popup html
           image: //image on the pin
             "http://localhost:3007/uploads/images/others/1560843546728.jpeg",
-          lineto: [
+          lineto|routeto: [
             {
               location_id: 2, // mandatory
-              distance: "22km",
-              time: "12 Min",
+              info:{html: "<div>distance: 22km,time: 12 Min</div>"",location}, // only for lines
               line: { // override lines config
                 width: 5,
                 color: "red",
-                images: [{ src: "/img/arrow.png", location: 0.3 }]
-              }
+                images: [{ src: "/img/arrow.png", location: 0.3 }] //only for lines
+              },
+              geometry: 'geometry string'
             }
           ],
           lng: -0.1318, //location of pin
@@ -200,9 +203,10 @@ export default {
   props: [
     "oljspath",
     "olcsspath",
+    "mapUrl",
     "click",
     "locations",
-    "lines",
+    "linestyle",
     "searchable",
     "locationiqkey",
     "showme"
@@ -212,9 +216,10 @@ export default {
   },
   async mounted() {
     this.olmap = await this.initation();
+
     let ol = this.olmap;
     let baseTilePath =
-      "http://mt.google.com/vt/lyrs=m@221097413,traffic&x={x}&y={y}&z={z}"; //Google Road Map
+      this.mapUrl || "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"; //default openstreet map
 
     var baselayer = new ol.layer.Tile({
       source: new ol.source.OSM({ url: baseTilePath })
@@ -231,9 +236,10 @@ export default {
         center: ol.proj.fromLonLat([-0.1318, 50.845]),
         zoom: 12,
         minZoom: 2,
-        maxZoom: 28
+        maxZoom: 18
       })
     });
+    window.thismap = this.map;
     if (this.locations) this.draw();
     if (this.click || this.searchable) this.bindpopup();
 
@@ -276,6 +282,7 @@ export default {
       let ol = this.olmap;
       let Overlay = ol.Overlay;
       let fromLonLat = ol.proj.fromLonLat;
+      let toLonLat = ol.proj.toLonLat;
       let Point = ol.geom.Point;
       let zindexoverlay = ev => {
         let thiscontainer = ev.target.closest(".ol-overlay-container");
@@ -294,6 +301,7 @@ export default {
               : "none";
         }
       };
+
       //draw pines
       this.pins.forEach(p => {
         if (!this.locations.find(l => l.id == p.id)) {
@@ -302,6 +310,9 @@ export default {
         }
       });
       // this.mapextend = ol.extend.createEmpty();
+      this.pins = this.pins.filter(p =>
+        (this.locations || []).find(l => l.id == p.id)
+      );
       for (let l of this.locations) {
         if (!l.lng || !l.lat) continue;
         let coordinate = fromLonLat([l.lng, l.lat]);
@@ -379,99 +390,234 @@ export default {
         this.lineoverlays.forEach(lo => this.map.removeOverlay(lo));
       }
       this.lineoverlays = [];
-      if (!this.locations.find(l => l.lineto)) return;
-      let source = new ol.source.Vector();
-      let vector = new ol.layer.Vector({
-        source
-      });
-      this.lineslayer = vector;
-      this.map.addLayer(vector);
-      for (let l of this.locations) {
-        if (!l.lineto) continue;
+      if (this.locations.find(l => l.lineto)) {
+        let source = new ol.source.Vector();
+        let vector = new ol.layer.Vector({
+          source
+        });
+        this.lineslayer = vector;
+        this.map.addLayer(vector);
+        for (let l of this.locations) {
+          if (!l.lineto) continue;
 
-        let startpin = this.pins.find(p => p.id == l.id).overlay.getPosition();
-        if (!Array.isArray(l.lineto)) l.lineto = [l.lineto];
-
-        for (let lineto of l.lineto) {
-          let finishpin = this.pins
-            .find(p => p.id == lineto.location_id)
+          let startpin = this.pins
+            .find(p => p.id == l.id)
             .overlay.getPosition();
-          let linesetting = {
-            ...{
-              color: "red",
-              width: 5,
-              images: {
-                src:
-                  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAATCAYAAACk9eypAAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TS0UrDnYQcQhSnSyKijhKFYtgobQVWnUwufRDaNKQpLg4Cq4FBz8Wqw4uzro6uAqC4AeIi6uToouU+L+k0CLGg+N+vLv3uHsHCPUyU82OcUDVLCMVj4nZ3IoYfEUQ3QhgDEMSM/VEeiEDz/F1Dx9f76I8y/vcn6NHyZsM8InEs0w3LOJ14ulNS+e8TxxmJUkhPiceNeiCxI9cl11+41x0WOCZYSOTmiMOE4vFNpbbmJUMlXiKOKKoGuULWZcVzluc1XKVNe/JXxjKa8tprtMcRByLSCAJETKq2EAZFqK0aqSYSNF+zMM/4PiT5JLJtQFGjnlUoEJy/OB/8LtbszA54SaFYkDgxbY/hoHgLtCo2fb3sW03TgD/M3CltfyVOjDzSXqtpUWOgN5t4OK6pcl7wOUO0P+kS4bkSH6aQqEAvJ/RN+WAvluga9XtrbmP0wcgQ10t3QAHh8BIkbLXPN7d2d7bv2ea/f0Ai11ysXD1QvQAAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfjBwsFNBiXqDHXAAABGElEQVQoz32TsUpDQRBFz0tiEAwIESzsrETsLMRWeyvFD/APrKxT+gUKtvZaCWJhmVZQ0cJaREVBhMQYc2x2YV3fy8CwzT0zd4ZZBIVReG+EdaFBVQgfQRzBW2FLmKgCFHoJ9CM8CrvCZBnwGkTfWae+0BHaQpECO8KzMAxgCn0Jh8KiUI9AU9gW7gM0yqCecCaspFBDWBO6wiCD4owXwmpqrS4sCUfCZ+iWQkPhIV9AIcwF34PMmoJlWyuEWeE861AJTAn7wnte/R8gtITjkm3FfIrCmjAvnAZhLh4Jl8JMFC8LV2UWQrcDoRWrbwjXFZX7wt6fmxLeKiq/CJtCs+xa87wTFoRa1Xmn2RXa4z5QOtyJMM2Y+AXxWiXWlbxGoQAAAABJRU5ErkJggg==",
-                anchor: [0.75, 0.5],
-                rotateWithView: true
-              },
-              ...(this.lines || {}),
-              ...(lineto.line || {})
-            }
-          };
-          if (!Array.isArray(linesetting.images))
-            linesetting.images = [linesetting.images];
-          var points = [startpin, finishpin];
-          var dx = finishpin[0] - startpin[0];
-          var dy = finishpin[1] - startpin[1];
-          var rotation = Math.atan2(dy, dx);
-          let featrueLine = new ol.Feature({
-            geometry: new ol.geom.LineString(points)
-          });
+          if (!Array.isArray(l.lineto)) l.lineto = [l.lineto];
 
-          let styles = linesetting.images.map((lsimg, i, ar) => {
-            let loc = lsimg.location || (1 / (ar.length + 1)) * (i + 1);
-            let midpoint = [
+          for (let lineto of l.lineto) {
+            if (!this.pins.find(p => p.id == lineto.location_id)) continue;
+            let finishpin = this.pins
+              .find(p => p.id == lineto.location_id)
+              .overlay.getPosition();
+            let linesetting = {
+              ...{
+                color: "red",
+                width: 5,
+                images: {
+                  src:
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAATCAYAAACk9eypAAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TS0UrDnYQcQhSnSyKijhKFYtgobQVWnUwufRDaNKQpLg4Cq4FBz8Wqw4uzro6uAqC4AeIi6uToouU+L+k0CLGg+N+vLv3uHsHCPUyU82OcUDVLCMVj4nZ3IoYfEUQ3QhgDEMSM/VEeiEDz/F1Dx9f76I8y/vcn6NHyZsM8InEs0w3LOJ14ulNS+e8TxxmJUkhPiceNeiCxI9cl11+41x0WOCZYSOTmiMOE4vFNpbbmJUMlXiKOKKoGuULWZcVzluc1XKVNe/JXxjKa8tprtMcRByLSCAJETKq2EAZFqK0aqSYSNF+zMM/4PiT5JLJtQFGjnlUoEJy/OB/8LtbszA54SaFYkDgxbY/hoHgLtCo2fb3sW03TgD/M3CltfyVOjDzSXqtpUWOgN5t4OK6pcl7wOUO0P+kS4bkSH6aQqEAvJ/RN+WAvluga9XtrbmP0wcgQ10t3QAHh8BIkbLXPN7d2d7bv2ea/f0Ai11ysXD1QvQAAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfjBwsFNBiXqDHXAAABGElEQVQoz32TsUpDQRBFz0tiEAwIESzsrETsLMRWeyvFD/APrKxT+gUKtvZaCWJhmVZQ0cJaREVBhMQYc2x2YV3fy8CwzT0zd4ZZBIVReG+EdaFBVQgfQRzBW2FLmKgCFHoJ9CM8CrvCZBnwGkTfWae+0BHaQpECO8KzMAxgCn0Jh8KiUI9AU9gW7gM0yqCecCaspFBDWBO6wiCD4owXwmpqrS4sCUfCZ+iWQkPhIV9AIcwF34PMmoJlWyuEWeE861AJTAn7wnte/R8gtITjkm3FfIrCmjAvnAZhLh4Jl8JMFC8LV2UWQrcDoRWrbwjXFZX7wt6fmxLeKiq/CJtCs+xa87wTFoRa1Xmn2RXa4z5QOtyJMM2Y+AXxWiXWlbxGoQAAAABJRU5ErkJggg==",
+                  anchor: [0.75, 0.5],
+                  rotateWithView: true
+                },
+                ...(this.linestyle || {}),
+                ...(lineto.style || {})
+              }
+            };
+            if (!Array.isArray(linesetting.images))
+              linesetting.images = [linesetting.images];
+            var points = [startpin, finishpin];
+            var dx = finishpin[0] - startpin[0];
+            var dy = finishpin[1] - startpin[1];
+            var rotation = Math.atan2(dy, dx);
+            let featrueLine;
+            if (lineto.geometry) {
+              featrueLine = new ol.Feature({
+                type: "route",
+                geometry: new ol.format.Polyline({
+                  factor: 1e5
+                }).readGeometry(lineto.geometry, {
+                  dataProjection: "EPSG:4326",
+                  featureProjection: "EPSG:3857"
+                })
+              });
+              console.log(featrueLine);
+            } else {
+              featrueLine = new ol.Feature({
+                geometry: new ol.geom.LineString(points)
+              });
+            }
+
+            let styles = linesetting.images.map((lsimg, i, ar) => {
+              let loc = lsimg.location || (1 / (ar.length + 1)) * (i + 1);
+              let midpoint = [
+                loc * finishpin[0] + (1 - loc) * startpin[0],
+                loc * finishpin[1] + (1 - loc) * startpin[1]
+              ];
+
+              return new ol.style.Style({
+                geometry: new Point(midpoint),
+                image: new ol.style.Icon({
+                  src: lsimg.src,
+                  anchor: lsimg.anchor,
+                  rotateWithView:
+                    lsimg.rotateWithView == undefined
+                      ? true
+                      : lsimg.rotateWithView,
+                  rotation: -rotation
+                })
+              });
+            });
+
+            styles.unshift(
+              new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                  color: linesetting.color || "red",
+                  width: linesetting.width || 5
+                })
+              })
+            );
+            featrueLine.setStyle(styles);
+
+            source.addFeature(featrueLine);
+
+            if (!lineto.info) continue;
+            let element = document.getElementById("lineinfo").cloneNode(true);
+            element.classList.add("lineinfo");
+            element.innerHTML = (lineto.info.html || "").trim();
+            element.onclick = zindexoverlay;
+            let loc = lineto.info.location || 0.5;
+            let position = [
               loc * finishpin[0] + (1 - loc) * startpin[0],
               loc * finishpin[1] + (1 - loc) * startpin[1]
             ];
-
-            return new ol.style.Style({
-              geometry: new Point(midpoint),
-              image: new ol.style.Icon({
-                src: lsimg.src,
-                anchor: lsimg.anchor,
-                rotateWithView:
-                  lsimg.rotateWithView == undefined
-                    ? true
-                    : lsimg.rotateWithView,
-                rotation: -rotation
-              })
+            let lineinfo = new Overlay({
+              element,
+              position,
+              positioning: "center-center"
             });
-          });
-
-          styles.unshift(
-            new ol.style.Style({
-              stroke: new ol.style.Stroke({
-                color: linesetting.color || "red",
-                width: linesetting.width || 5
-              })
-            })
-          );
-          featrueLine.setStyle(styles);
-
-          source.addFeature(featrueLine);
-
-          if (!lineto.info) continue;
-          let element = document.getElementById("lineinfo").cloneNode(true);
-          element.classList.add("lineinfo");
-          element.innerHTML = (lineto.info.html || "").trim();
-          element.onclick = zindexoverlay;
-          let loc = lineto.info.location || 0.5;
-          let position = [
-            loc * finishpin[0] + (1 - loc) * startpin[0],
-            loc * finishpin[1] + (1 - loc) * startpin[1]
-          ];
-          let lineinfo = new Overlay({
-            element,
-            position,
-            positioning: "center-center"
-          });
-          this.lineoverlays.push(lineinfo);
-          this.map.addOverlay(lineinfo);
+            this.lineoverlays.push(lineinfo);
+            this.map.addOverlay(lineinfo);
+          }
         }
       }
+
+      // draw routes
+
+      if (this.routeslayer) this.map.removeLayer(this.routeslayer);
+      if (!this.locations.find(l => l.routeto)) return;
+      let routeSource = new ol.source.Vector();
+      let routeVector = new ol.layer.Vector({
+        source: routeSource
+      });
+      this.routeslayer = routeVector;
+      this.map.addLayer(routeVector);
+      for (let l of this.locations) {
+        if (!l.routeto) continue;
+        let startpin = this.pins.find(p => p.id == l.id).overlay.getPosition();
+        if (!Array.isArray(l.routeto)) l.routeto = [l.routeto];
+        for (let routeto of l.routeto) {
+          if (!this.pins.find(p => p.id == routeto.location_id)) continue;
+          let finishpin = this.pins
+            .find(p => p.id == routeto.location_id)
+            .overlay.getPosition();
+          try {
+            this.getroute(
+              toLonLat(startpin).join(),
+              toLonLat(finishpin).join()
+            ).then(result => {
+              let route = new ol.format.Polyline({
+                factor: 1e5
+              }).readGeometry(result[0].geometry, {
+                dataProjection: "EPSG:4326",
+                featureProjection: "EPSG:3857"
+              });
+              let routesetting = {
+                ...{
+                  color: [40, 40, 40, 0.8],
+                  width: 5,
+                  ...(this.linestyle || {}),
+                  ...(routeto.style || {})
+                }
+              };
+              let featureRoute = new ol.Feature({
+                type: "route",
+                geometry: route
+              });
+              featureRoute.setStyle(
+                new ol.style.Style({
+                  stroke: new ol.style.Stroke({
+                    color: routesetting.color,
+                    width: routesetting.width
+                  }),
+                  geometry: route,
+
+                  zIndex: 99
+                })
+              );
+              routeSource.addFeature(featureRoute);
+            });
+          } catch {
+            continue;
+          }
+        }
+      }
+    },
+    getnearest(loc) {
+      let _self = this;
+      return new Promise((resolve, reject) => {
+        let url_osrm_nearest = "//router.project-osrm.org/nearest/v1/driving/";
+        let thisnearest = this.cachednearest.find(cn => cn.id == loc);
+        if (thisnearest) {
+          return resolve(thisnearest.result);
+        } else {
+          window
+            .fetch(url_osrm_nearest + loc, { cache: "no-store" })
+            .then(r => r.json())
+            .then(res => {
+              if (res.code != "Ok")
+                return reject("near location" + loc + "not found");
+              let result = res.waypoints[0];
+              if (_self.cachednearest.length > 60)
+                _self.cachednearest = _self.cachednearest.slice(1);
+              _self.cachednearest.push({ id: loc, result });
+              resolve(result);
+            });
+        }
+      });
+    },
+    getroute(start, finish) {
+      let _self = this;
+      let id = start + ";" + finish;
+      let url_osrm_route = "//router.project-osrm.org/route/v1/driving/";
+      return new Promise((resolve, reject) => {
+        let thisroute = _self.cachedroutes.find(cr => cr.id == id);
+        if (thisroute) {
+          return resolve(thisroute.result);
+        } else {
+          // new Promise.all([_self.getnearest(start), _self.getnearest(finish)])
+          //   .then(result => {
+          fetch(
+            url_osrm_route +
+              // result[0].location + ";" + result[1].location
+              id
+          )
+            .then(r => r.json())
+            .then(result => {
+              if (result.code != "Ok") return reject("route not ok");
+              thisroute = result.routes;
+              if (_self.cachedroutes.length > 30)
+                _self.cachedroutes = _self.cachedroutes.slice(1);
+              _self.cachedroutes.push({
+                id,
+                result: thisroute
+              });
+              return resolve(thisroute);
+              // });
+            })
+            .catch(() => reject("can't get route"));
+        }
+      });
     },
     bindpopup() {
       if (!this.click && !this.searchable)
@@ -483,7 +629,6 @@ export default {
         });
         this.map.addOverlay(this.popup.overlay);
       }
-      this.map.un("click", this.clickpopup);
       this.map.on("click", this.clickpopup);
     },
     async clickpopup(evt) {
@@ -494,6 +639,7 @@ export default {
       let coordinate = evt.coordinate;
       let latlng = toLonLat(coordinate || []);
       this.popup.title = clickval;
+      this.popup.show = true;
       this.popup.overlay.setPosition(coordinate);
       let result = evt.result;
       if (!result) {
@@ -517,17 +663,17 @@ export default {
       }
       this.$emit("locationselected", result.error ? null : result);
       this.map.getView().animate({ center: coordinate, duration: 500 });
-      this.popup.show = true;
     },
     showpopup(p) {
       p.showpopup = !p.showpopup;
       this.$forceUpdate();
     },
     showall() {
+      let overlayarray = this.map.getOverlays().getArray();
+      if (!overlayarray.length)
+        return this.map.getView().setZoom(this.map.getView().getMinZoom());
       let extent = this.olmap.extent.boundingExtent(
-        this.map
-          .getOverlays()
-          .getArray()
+        overlayarray
           .map(o => (o.id != "loc-popup" ? o.getPosition() : null))
           .filter(o => o)
       );
@@ -898,6 +1044,8 @@ export default {
       align-items: center;
       font-size: 32px;
       border-left: 1px solid gray;
+      cursor: pointer;
+      user-select: none;
     }
     .autoresults {
       position: absolute;
