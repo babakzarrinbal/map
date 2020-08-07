@@ -233,8 +233,8 @@ export default {
       layers: [baselayer],
       target: "olmap",
       view: new ol.View({
-        center: ol.proj.fromLonLat([-0.1318, 50.845]),
-        zoom: 12,
+        center: ol.proj.fromLonLat([51.3747296,35.6938534]),
+        zoom: 10,
         minZoom: 2,
         maxZoom: 18
       })
