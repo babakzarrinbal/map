@@ -12,8 +12,8 @@ self.__precacheManifest = [
     "url": "/map/vendors/openlayer.v.5.3.0/style.css"
   },
   {
-    "revision": "8cc642f540ed0d99b593",
-    "url": "/map/css/chunk-vendors.670fde4c.css"
+    "revision": "735ab4f94fbcd57074377afca324c813",
+    "url": "/map/robots.txt"
   },
   {
     "revision": "8cc642f540ed0d99b593",
@@ -24,16 +24,16 @@ self.__precacheManifest = [
     "url": "/map/logo.png"
   },
   {
-    "revision": "735ab4f94fbcd57074377afca324c813",
-    "url": "/map/robots.txt"
-  },
-  {
     "revision": "8308733c5a1f858e39a83b437a92cf9b",
     "url": "/map/img/ico/camera-video.png"
   },
   {
-    "revision": "013b4c5a19a980d4db2ac192e2609a73",
-    "url": "/map/img/ico/changecam.png"
+    "revision": "ab2b6b5813f7d729ae438ca794f9d06e",
+    "url": "/map/img/ico/capture-video-stop.png"
+  },
+  {
+    "revision": "466ee9fffd0fe04190f5d30da149ae4f",
+    "url": "/map/img/ico/file-icon.png"
   },
   {
     "revision": "a0714fb02a061ca895a573ec5c955a9a",
@@ -56,19 +56,19 @@ self.__precacheManifest = [
     "url": "/map/img/markers/restaurant_marker.png"
   },
   {
-    "revision": "4683fb013c2262a0fcb699366105f24e",
-    "url": "/map/img/markers/you.png"
-  },
-  {
     "revision": "d8f8be8601d46e34d280ea4e44a5be1d",
     "url": "/map/img/puff.svg"
   },
   {
-    "revision": "69579c0c97734b15ec14",
-    "url": "/map/js/app.e9a8e034.js"
+    "revision": "4683fb013c2262a0fcb699366105f24e",
+    "url": "/map/img/markers/you.png"
   },
   {
-    "revision": "3e2805ff3255bd04712be8caee6a01e3",
+    "revision": "692f475087e12b5843cc",
+    "url": "/map/js/app.ce4388aa.js"
+  },
+  {
+    "revision": "e4f96fdbeb9c952f3b8e5d9570dbbd0d",
     "url": "/map/index.html"
   },
   {
@@ -76,16 +76,20 @@ self.__precacheManifest = [
     "url": "/map/img/ico/gallery.png"
   },
   {
-    "revision": "466ee9fffd0fe04190f5d30da149ae4f",
-    "url": "/map/img/ico/file-icon.png"
+    "revision": "013b4c5a19a980d4db2ac192e2609a73",
+    "url": "/map/img/ico/changecam.png"
+  },
+  {
+    "revision": "01711fa464361d1f2c5994e387288432",
+    "url": "/map/img/icon/notsee.png"
   },
   {
     "revision": "3e7f8afa35e80c2ec94e5d93bbf47b3a",
     "url": "/map/img/icon/see.png"
   },
   {
-    "revision": "01711fa464361d1f2c5994e387288432",
-    "url": "/map/img/icon/notsee.png"
+    "revision": "757cd2bbe52f7583c74f50dbb6b8da22",
+    "url": "/map/img/markers/driver_truck_pointer_orange.png"
   },
   {
     "revision": "7819a598a0181493e0b1b3dea1aae7d2",
@@ -96,20 +100,12 @@ self.__precacheManifest = [
     "url": "/map/img/markers/driver_truck_pointer_red.png"
   },
   {
-    "revision": "757cd2bbe52f7583c74f50dbb6b8da22",
-    "url": "/map/img/markers/driver_truck_pointer_orange.png"
-  },
-  {
     "revision": "5ecccd935f91d9a03786d435c5516c5b",
     "url": "/map/img/markers/driver_truck_pointer.png"
   },
   {
     "revision": "802a6b8a10c643ba91997a8bd1177f68",
     "url": "/map/img/ico/capture-video.png"
-  },
-  {
-    "revision": "ab2b6b5813f7d729ae438ca794f9d06e",
-    "url": "/map/img/ico/capture-video-stop.png"
   },
   {
     "revision": "507c66317527fcf167383c9735b34472",
@@ -124,7 +120,11 @@ self.__precacheManifest = [
     "url": "/map/img/ico/attach.png"
   },
   {
-    "revision": "69579c0c97734b15ec14",
+    "revision": "8cc642f540ed0d99b593",
+    "url": "/map/css/chunk-vendors.670fde4c.css"
+  },
+  {
+    "revision": "692f475087e12b5843cc",
     "url": "/map/css/app.b8c4dbe0.css"
   }
 ];

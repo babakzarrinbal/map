@@ -1,4 +1,4 @@
-importScripts("/map/precache-manifest.43061f170282cd883ce6275746ed64f8.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/map/precache-manifest.b37d6ba54eb3a1e202985724d9e13ffb.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 self.addEventListener("install", function(event) {
   // console.log("Service Worker installing.");
@@ -29,12 +29,12 @@ self.addEventListener("push", function(event) {
   event.waitUntil(notificationPromise);
 });
 
-// self.addEventListener("notificationclick", function(event) {
-//   event.notification.close();
-//   event.waitUntil(
-//     clients.openWindow(
-//       "http://localhost:5000/#/" + (event.notification.data || {}).gotourl || ""
-//     )
-//   );
-// });
+self.addEventListener("notificationclick", function(event) {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow(
+      "http://localhost:5000/#/" + (event.notification.data || {}).gotourl || ""
+    )
+  );
+});
 

@@ -728,7 +728,8 @@ export default {
             ])
           });
         },
-        () => {
+        (e) => {
+          console.error(e);
           window.toastr.error("Allow access to location", "Error");
         }
       );
@@ -776,10 +777,12 @@ export default {
                 this.me.watchfuncrej
               );
             },
-            () => {
+            (e) => {
+              console.error(e);
               window.toastr.error("Allow access to location", "Error");
               resolve(false);
             }
+            ,{enableHighAccuracy: true}
           );
         });
         if (!loc) return;
