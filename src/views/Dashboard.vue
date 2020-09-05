@@ -4,7 +4,7 @@
     <olmap
       oljspath="vendors/openlayer.v.5.3.0/script.js"
       olcsspath="vendors/openlayer.v.5.3.0/style.css"
-      mapUrl="http://mt.google.com/vt/lyrs=m@221097413,traffic&x={x}&y={y}&z={z}"
+      mapUrl="https://mt.google.com/vt/lyrs=m@221097413,traffic&x={x}&y={y}&z={z}"
       :locations="locations"
       :lines="{width:5,color:'#e49af7c7'}"
       locationiqkey="188e59707db08f"

@@ -63,7 +63,7 @@ export default {
     // });
     var baseTilePath =
       // "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png";
-      "http://mt.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"; //Google Road Map
+      "https://mt.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"; //Google Road Map
 
     var transportTilesPath =
       //  "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png";
@@ -72,7 +72,7 @@ export default {
       // "http://mt.google.com/vt/lyrs=m@221097413,traffic&x={x}&y={y}&z={z}"; //Google map with traffic @221097413,traffic
       // "http://mt.google.com/vt/lyrs=m@221097413,transit&x={x}&y={y}&z={z}"; //Google map with transit @221097413,traffic
       // 'http://mt.google.com/vt/lyrs=h&x={x}&y={y}&z={z}'; //Google Road Names
-      "http://mt.google.com/vt/lyrs=s&hl=pl&&x={x}&y={y}&z={z}"; // Google Satellite
+      "https://mt.google.com/vt/lyrs=s&hl=pl&&x={x}&y={y}&z={z}"; // Google Satellite
     // 'http://mt.google.com/vt/lyrs=y&x={x}&y={y}&z={z}'; //Google Satellite & Roads
     // 'http://mt.google.com/vt/lyrs=t&x={x}&y={y}&z={z}'; //Google Terrain
     // 'http://mt.google.com/vt/lyrs=p&x={x}&y={y}&z={z}'; //Google Terrain & Roads

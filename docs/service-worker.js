@@ -29,12 +29,12 @@ self.addEventListener("push", function(event) {
   event.waitUntil(notificationPromise);
 });
 
-self.addEventListener("notificationclick", function(event) {
-  event.notification.close();
-  event.waitUntil(
-    clients.openWindow(
-      "http://localhost:5000/#/" + (event.notification.data || {}).gotourl || ""
-    )
-  );
-});
+// self.addEventListener("notificationclick", function(event) {
+//   event.notification.close();
+//   event.waitUntil(
+//     clients.openWindow(
+//       "http://localhost:5000/#/" + (event.notification.data || {}).gotourl || ""
+//     )
+//   );
+// });
 

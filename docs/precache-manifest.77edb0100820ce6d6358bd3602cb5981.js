@@ -12,8 +12,8 @@ self.__precacheManifest = [
     "url": "/map/vendors/openlayer.v.5.3.0/style.css"
   },
   {
-    "revision": "735ab4f94fbcd57074377afca324c813",
-    "url": "/map/robots.txt"
+    "revision": "8cc642f540ed0d99b593",
+    "url": "/map/css/chunk-vendors.670fde4c.css"
   },
   {
     "revision": "8cc642f540ed0d99b593",
@@ -22,6 +22,10 @@ self.__precacheManifest = [
   {
     "revision": "0177ac61a2d8ae9ef2c709a57fc52f4a",
     "url": "/map/logo.png"
+  },
+  {
+    "revision": "735ab4f94fbcd57074377afca324c813",
+    "url": "/map/robots.txt"
   },
   {
     "revision": "8308733c5a1f858e39a83b437a92cf9b",
@@ -34,10 +38,6 @@ self.__precacheManifest = [
   {
     "revision": "a0714fb02a061ca895a573ec5c955a9a",
     "url": "/map/img/ico/files.png"
-  },
-  {
-    "revision": "4e304aecf7492e59dbe18558db8d2098",
-    "url": "/map/img/ico/gallery.png"
   },
   {
     "revision": "9383b42d34b0e8a8cb2a2c6c2af8adea",
@@ -64,40 +64,44 @@ self.__precacheManifest = [
     "url": "/map/img/puff.svg"
   },
   {
-    "revision": "e71d9639f3a373068146",
-    "url": "/map/js/app.2b5c1638.js"
+    "revision": "69579c0c97734b15ec14",
+    "url": "/map/js/app.e9a8e034.js"
   },
   {
-    "revision": "5d262d3c5e95e1fff8060f9e1c623216",
+    "revision": "3e2805ff3255bd04712be8caee6a01e3",
     "url": "/map/index.html"
   },
   {
-    "revision": "5ecccd935f91d9a03786d435c5516c5b",
-    "url": "/map/img/markers/driver_truck_pointer.png"
+    "revision": "4e304aecf7492e59dbe18558db8d2098",
+    "url": "/map/img/ico/gallery.png"
   },
   {
     "revision": "466ee9fffd0fe04190f5d30da149ae4f",
     "url": "/map/img/ico/file-icon.png"
   },
   {
-    "revision": "01711fa464361d1f2c5994e387288432",
-    "url": "/map/img/icon/notsee.png"
-  },
-  {
     "revision": "3e7f8afa35e80c2ec94e5d93bbf47b3a",
     "url": "/map/img/icon/see.png"
+  },
+  {
+    "revision": "01711fa464361d1f2c5994e387288432",
+    "url": "/map/img/icon/notsee.png"
   },
   {
     "revision": "7819a598a0181493e0b1b3dea1aae7d2",
     "url": "/map/img/markers/driver_truck_pointer_green.png"
   },
   {
+    "revision": "ae50af9f16e15cdbefefc426241d4b7b",
+    "url": "/map/img/markers/driver_truck_pointer_red.png"
+  },
+  {
     "revision": "757cd2bbe52f7583c74f50dbb6b8da22",
     "url": "/map/img/markers/driver_truck_pointer_orange.png"
   },
   {
-    "revision": "ae50af9f16e15cdbefefc426241d4b7b",
-    "url": "/map/img/markers/driver_truck_pointer_red.png"
+    "revision": "5ecccd935f91d9a03786d435c5516c5b",
+    "url": "/map/img/markers/driver_truck_pointer.png"
   },
   {
     "revision": "802a6b8a10c643ba91997a8bd1177f68",
@@ -120,11 +124,7 @@ self.__precacheManifest = [
     "url": "/map/img/ico/attach.png"
   },
   {
-    "revision": "8cc642f540ed0d99b593",
-    "url": "/map/css/chunk-vendors.670fde4c.css"
-  },
-  {
-    "revision": "e71d9639f3a373068146",
-    "url": "/map/css/app.a6108e62.css"
+    "revision": "69579c0c97734b15ec14",
+    "url": "/map/css/app.b8c4dbe0.css"
   }
 ];
